@@ -1,0 +1,36 @@
+dataset:
+  name: cifar_100
+  root: ~/datasets/cifar
+  train:
+    split: train
+  val:
+    split: test
+  resize: 224
+
+training:
+  optimizer:
+    name: AdamW
+    lr: 6.0e-4
+    weight_decay: 0.05
+  lr_schedule:
+    name: cosine_annealing
+    T_max: 240
+  train_epochs: 240
+  print_interval: 20
+  val_interval: 1000
+  batch_size: 64
+  num_workers: 16
+  clip_max_norm: 0.1
+
+validation:
+  batch_size: 128
+  num_workers: 16
+
+model:
+  name: sparse_pit_tiny
+  pretrained: False
+
+loss:
+  name: ce_loss
+  weight_dict:
+    cls: 1.0
